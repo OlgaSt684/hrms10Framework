@@ -2,6 +2,7 @@ package utils;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,8 +18,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class CommonMethods {
 
 	public static WebDriver driver;
-	
-	
 
 	@BeforeMethod(alwaysRun = true) // pre condition
 	public void openBrowser() {
@@ -68,6 +67,17 @@ public class CommonMethods {
 	public static void click(WebElement element) {
 		element.click();
 	}
+
+	public static JavascriptExecutor getJSExecutor() {
+		JavascriptExecutor js=(JavascriptExecutor) driver;
+		return js;
+	}
+	
+	public static void jsClick(WebElement element) {
+		getJSExecutor().executeScript("arguments[0].click();", element);
+	}
+	
+	
 
 	@AfterMethod(alwaysRun = true) // post condition
 	public void tearDown() {
